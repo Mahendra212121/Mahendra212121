@@ -37,7 +37,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--white);
-            overflow-x: hidden; /* Prevents horizontal scroll */
+            overflow-x: hidden;
         }
 
         .container {
@@ -132,7 +132,7 @@
             color: var(--dark-color);
             font-size: 1.8rem;
             cursor: pointer;
-            z-index: 1100; /* Ensure toggle is above overlay */
+            z-index: 1100;
         }
         
         /* Ticker / Running Line */
@@ -150,7 +150,8 @@
 
         .ticker-move {
             display: flex;
-            animation: ticker 40s linear infinite;
+            /* --- SPEED INCREASED HERE --- */
+            animation: ticker 20s linear infinite;
         }
 
         .ticker-item {
@@ -171,7 +172,7 @@
         }
         
         main {
-            padding-top: 122px; /* Adjusted to new ticker height */
+            padding-top: 122px;
         }
 
         /* Hero Section */
@@ -247,7 +248,7 @@
 
         .portal-card {
             background: var(--white);
-            padding: 2.5rem 1.5rem; /* Adjusted padding */
+            padding: 2.5rem 1.5rem;
             border-radius: 20px;
             box-shadow: var(--shadow);
             text-align: center;
@@ -339,7 +340,7 @@
         .footer a:hover { text-decoration: underline; }
         .footer-bottom { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #495057; font-size: 0.9rem; color: #adb5bd; }
         
-        /* --- MOBILE FRIENDLY FIXES --- */
+        /* Mobile Friendly Fixes */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
