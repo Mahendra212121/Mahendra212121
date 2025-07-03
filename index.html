@@ -131,6 +131,7 @@
             color: var(--dark-color);
             font-size: 1.8rem;
             cursor: pointer;
+            z-index: 1001; /* Ensure it's above the menu */
         }
         
         /* Ticker / Running Line */
@@ -407,13 +408,13 @@
             color: #adb5bd;
         }
         
-        /* Responsive */
+        /* --- MOBILE FRIENDLY FIXES START HERE --- */
         @media (max-width: 768px) {
             .nav-menu {
-                display: none;
+                display: none; /* Hide by default */
                 flex-direction: column;
                 position: absolute;
-                top: 100%;
+                top: 84px; /* Position below the header */
                 left: 0;
                 width: 100%;
                 background: var(--white);
@@ -421,31 +422,44 @@
                 padding: 1rem 0;
                 gap: 0;
             }
+
             .nav-menu.active {
-                display: flex;
+                display: flex; /* Show when active */
             }
+
             .nav-menu li {
                 width: 100%;
                 text-align: center;
             }
+
             .nav-menu a {
                 color: var(--dark-color);
                 display: block;
                 padding: 1rem;
             }
+
             .mobile-menu-toggle {
-                display: block;
+                display: block; /* Show the hamburger button on mobile */
             }
+
             .hero-content h1 {
                 font-size: 2.2rem;
             }
+
             .ticker-wrap {
-                top: 75px; 
+                top: 84px; /* Adjust ticker position on mobile */
+                font-size: 0.9rem;
             }
+
             main {
-                padding-top: 125px;
+                padding-top: 130px; /* Adjust main content padding */
+            }
+
+            .portal-card {
+                padding: 2rem 1.5rem;
             }
         }
+        /* --- MOBILE FRIENDLY FIXES END HERE --- */
 
     </style>
 </head>
@@ -573,21 +587,18 @@
                 return;
             }
 
-            // Correctly display the loader animation inside the result div
             resultDiv.innerHTML = `<div class="loader"><div></div><div></div><div></div><div></div></div>`;
 
             try {
                 const response = await fetch(`${SCRIPT_URL}?roll=${rollNumber}`);
                 const data = await response.json();
                 
-                // The result will replace the loader animation
                 if (data.link) {
                     resultDiv.innerHTML = `<a href="${data.link}" target="_blank" class="btn btn-download"><i class="fas fa-check-circle"></i> Download Certificate</a>`;
                 } else {
                     resultDiv.innerHTML = `<span style="color: #dc3545;">${data.error || 'No record found.'}</span>`;
                 }
             } catch (error) {
-                // The error message will also replace the loader
                 resultDiv.innerHTML = `<span style="color: #dc3545;">An error occurred. Please try again later.</span>`;
             }
         }
@@ -599,11 +610,13 @@
             }
         });
 
-        // --- Mobile Menu & Header Scroll Effect ---
+        // --- MOBILE FRIENDLY JAVASCRIPT FIXES ---
         const header = document.getElementById('header');
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const navMenu = document.getElementById('nav-menu');
+        const menuIcon = mobileMenuToggle.querySelector('i');
 
+        // 1. Logic for Header color change on scroll
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
@@ -612,8 +625,18 @@
             }
         });
 
+        // 2. Logic for mobile menu toggle (Open/Close and Icon Change)
         mobileMenuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            
+            // Change icon from hamburger to cross (X) and back
+            if (navMenu.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
         });
 
     </script>
