@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G.R.D. Academy - Khuian Sarwar, Punjab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #28a745;
+            --accent-color: #ff6b35;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --white: #ffffff;
+            --text-color: #333333;
+            --light-text: #666666;
+            --border-color: #e9ecef;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #0056b3, #007bff);
+            --gradient-secondary: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 50px;
+            height: auto;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Ticker / Running Line */
+        .ticker-wrap {
+            position: fixed;
+            top: 85px; 
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 10px 0;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .ticker-move {
+            display: inline-flex;
+            animation: ticker 40s linear infinite;
+        }
+
+        .ticker-item {
+            white-space: nowrap;
+            padding: 0 2rem;
+            font-weight: 500;
+        }
+        
+        .ticker-item i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        main {
+            padding-top: 135px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 120px 0 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Base Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Portal Section */
+        #portal {
+            background-color: var(--light-color);
+        }
+
+        .portal-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .portal-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        #rollNumberInput {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+        }
+        
+        #rollNumberInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.1);
+        }
+        
+        .portal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .portal-btn {
+            padding: 18px 30px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+        }
+
+        .btn-result {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+        
+        .btn-admission {
+            background: var(--gradient-secondary);
+            color: var(--white);
+        }
+        
+        .btn-download {
+             background: linear-gradient(135deg, #dc3545, #c82333);
+             color: var(--white);
+        }
+        
+        #result {
+            margin-top: 1.5rem;
+            min-height: 60px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Loader Animation */
+        .loader {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 15px;
+        }
+        .loader div {
+            position: absolute;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+        .loader div:nth-child(1) {
+            left: 8px;
+            animation: loader1 0.6s infinite;
+        }
+        .loader div:nth-child(2) {
+            left: 8px;
+            animation: loader2 0.6s infinite;
+        }
+        .loader div:nth-child(3) {
+            left: 32px;
+            animation: loader2 0.6s infinite;
+        }
+        .loader div:nth-child(4) {
+            left: 56px;
+            animation: loader3 0.6s infinite;
+        }
+        @keyframes loader1 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        @keyframes loader3 {
+            0% { transform: scale(1); }
+            100% { transform: scale(0); }
+        }
+        @keyframes loader2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(24px, 0); }
+        }
+
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .course-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-card-content {
+            padding: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+        
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #495057;
+            font-size: 0.9rem;
+            color: #adb5bd;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                box-shadow: var(--shadow);
+                padding: 1rem 0;
+                gap: 0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+            .nav-menu a {
+                color: var(--dark-color);
+                display: block;
+                padding: 1rem;
+            }
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .ticker-wrap {
+                top: 75px; 
+            }
+            main {
+                padding-top: 125px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="https://i.ibb.co/b3x2xQ7/GRD-Logo-Idea-2.png" alt="G.R.D. Computer Academy Logo">
+                <h1>G.R.D. Academy</h1>
+            </a>
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portal">Student Portal</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            <div class="ticker-item"><i class="fas fa-bullhorn"></i> Admissions for the 2025-26 session are now open! Limited seats available.</div>
+            <div class="ticker-item"><i class="fas fa-star"></i> New courses launched in Web Development & Data Science. Inquire today!</div>
+            <div class="ticker-item"><i class="fas fa-bullhorn"></i> Admissions for the 2025-26 session are now open! Limited seats available.</div>
+            <div class="ticker-item"><i class="fas fa-star"></i> New courses launched in Web Development & Data Science. Inquire today!</div>
+        </div>
+    </div>
+
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Welcome to G.R.D. Computer Academy</h1>
+                <p>Your journey to technical excellence begins here. Access your results and apply for courses seamlessly.</p>
+                <a href="#portal" class="btn btn-secondary">Get Started</a>
+            </div>
+        </section>
+
+        <section class="section" id="portal">
+            <div class="container">
+                <div class="portal-card">
+                    <h2>Student Portal</h2>
+                    <p>Download your results & apply for new courses.</p>
+                    <input type="text" id="rollNumberInput" placeholder="Enter Your Roll Number Here">
+                    <div id="result">
+                        </div>
+                    <div class="portal-buttons">
+                        <button class="btn portal-btn btn-result" onclick="getCertificate()">
+                            <i class="fas fa-download"></i> Download Result
+                        </button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUtOs7w37DDlYWDHW0oQcdLekXsnll_FktGURvYCF8CjL_gA/viewform" target="_blank" class="btn portal-btn btn-admission">
+                            <i class="fas fa-file-alt"></i> Apply Online
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="courses" style="background-color: var(--light-color);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Courses Offered</h2>
+                    <p>We provide a range of courses to equip you with the latest technical skills.</p>
+                </div>
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <div class="course-card-content">
+                            <h3>Basic Computer Course</h3>
+                            <p>Foundational knowledge of computer operations, MS Office, and internet usage.</p>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-card-content">
+                            <h3>Advanced Diploma in Computer Applications</h3>
+                            <p>In-depth study of programming languages, database management, and software development.</p>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-card-content">
+                            <h3>Web Designing & Development</h3>
+                            <p>Learn to build modern, responsive websites with HTML, CSS, JavaScript, and more.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer" id="contact">
+             <div class="container">
+                <div class="section-header">
+                    <h2 style="color: var(--white);">Contact Us</h2>
+                </div>
+                <p>Have questions? We'd love to hear from you.</p>
+                <p style="font-size: 1.2rem; font-weight: 500;">
+                    <i class="fas fa-phone-alt"></i> <a href="tel:+919888948065">+91 98889 48065</a>
+                </p>
+                <p style="font-size: 1.2rem; font-weight: 500;">
+                    <i class="fas fa-envelope"></i> <a href="mailto:grdacademykhuiansarwar@gmail.com">grdacademykhuiansarwar@gmail.com</a>
+                </p>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 G.R.D. Academy, Khuian Sarwar. All Rights Reserved.</p>
+                </div>
+             </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- Configuration ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzE7MIrSk36x4_RwBCCaiMl4hTsgC1jDYOsM20VCRp1LTb50Q46-UValh1-UJREvPVa/exec";
+        
+        // --- Student Portal Logic ---
+        const rollNumberInput = document.getElementById('rollNumberInput');
+        const resultDiv = document.getElementById('result');
+        
+        async function getCertificate() {
+            const rollNumber = rollNumberInput.value.trim();
+            if (!rollNumber) {
+                resultDiv.innerHTML = `<span style="color: #dc3545;">Please enter a valid roll number.</span>`;
+                return;
+            }
+
+            // Correctly display the loader animation inside the result div
+            resultDiv.innerHTML = `<div class="loader"><div></div><div></div><div></div><div></div></div>`;
+
+            try {
+                const response = await fetch(`${SCRIPT_URL}?roll=${rollNumber}`);
+                const data = await response.json();
+                
+                // The result will replace the loader animation
+                if (data.link) {
+                    resultDiv.innerHTML = `<a href="${data.link}" target="_blank" class="btn btn-download"><i class="fas fa-check-circle"></i> Download Certificate</a>`;
+                } else {
+                    resultDiv.innerHTML = `<span style="color: #dc3545;">${data.error || 'No record found.'}</span>`;
+                }
+            } catch (error) {
+                // The error message will also replace the loader
+                resultDiv.innerHTML = `<span style="color: #dc3545;">An error occurred. Please try again later.</span>`;
+            }
+        }
+        
+        rollNumberInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                getCertificate();
+            }
+        });
+
+        // --- Mobile Menu & Header Scroll Effect ---
+        const header = document.getElementById('header');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+    </script>
+</body>
+</html>
