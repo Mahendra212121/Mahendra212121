@@ -37,7 +37,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--white);
-            overflow-x: hidden;
+            overflow-x: hidden; 
         }
 
         .container {
@@ -81,8 +81,10 @@
         }
 
         .logo img {
-            width: 45px;
-            height: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .logo h1 {
@@ -150,8 +152,7 @@
 
         .ticker-move {
             display: flex;
-            /* --- SPEED INCREASED HERE --- */
-            animation: ticker 10s linear infinite;
+            animation: ticker 25s linear infinite; /* Faster speed */
         }
 
         .ticker-item {
@@ -226,7 +227,7 @@
 
         /* Section Base Styles */
         .section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
 
         .section-header {
@@ -235,10 +236,24 @@
         }
 
         .section-header h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 1rem;
+        }
+        
+        /* About Section with Image */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
         }
         
         /* Portal Section */
@@ -256,12 +271,6 @@
             margin: 0 auto;
         }
         
-        .portal-card h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
         #rollNumberInput {
             width: 100%;
             padding: 18px 20px;
@@ -269,14 +278,7 @@
             border-radius: 12px;
             font-size: 1.1rem;
             font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
             margin-top: 1.5rem;
-        }
-        
-        #rollNumberInput:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(0, 86, 179, 0.1);
         }
         
         .portal-buttons {
@@ -292,31 +294,11 @@
             border-radius: 12px;
         }
 
-        .btn-result {
-            background: var(--gradient-primary);
-            color: var(--white);
-        }
+        .btn-result { background: var(--gradient-primary); color: var(--white); }
+        .btn-admission { background: var(--gradient-secondary); color: var(--white); }
+        .btn-download { background: linear-gradient(135deg, #dc3545, #c82333); color: var(--white); }
         
-        .btn-admission {
-            background: var(--gradient-secondary);
-            color: var(--white);
-        }
-        
-        .btn-download {
-             background: linear-gradient(135deg, #dc3545, #c82333);
-             color: var(--white);
-        }
-        
-        #result {
-            margin-top: 1.5rem;
-            min-height: 60px;
-            font-weight: 600;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* Loader Animation */
+        #result { margin-top: 1.5rem; min-height: 60px; font-weight: 600; display: flex; justify-content: center; align-items: center; }
         .loader { display: inline-block; position: relative; width: 80px; height: 15px; }
         .loader div { position: absolute; top: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--primary-color); animation-timing-function: cubic-bezier(0, 1, 1, 0); }
         .loader div:nth-child(1) { left: 8px; animation: loader1 0.6s infinite; }
@@ -328,10 +310,14 @@
         @keyframes loader2 { 0% { transform: translate(0, 0); } 100% { transform: translate(24px, 0); } }
 
         /* Courses Section */
-        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .course-card { background: var(--white); border-radius: 15px; box-shadow: var(--shadow); transition: all 0.3s ease; overflow: hidden; }
-        .course-card:hover { transform: translateY(-10px); }
-        .course-card-content { padding: 2rem; }
+        .promo-banner {
+            display: block;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
 
         /* Footer */
         .footer { background: var(--dark-color); color: var(--white); padding: 3rem 0; text-align: center; }
@@ -357,17 +343,12 @@
                 transform: translateX(100%);
                 transition: transform 0.3s ease-in-out;
             }
-
-            .nav-menu.active {
-                transform: translateX(0);
-                display: flex;
-            }
-
+            .nav-menu.active { transform: translateX(0); display: flex; }
             .nav-menu li { width: 100%; text-align: center; }
             .nav-menu a { color: var(--dark-color); display: block; padding: 1rem; font-size: 1.2rem; }
             .mobile-menu-toggle { display: block; }
-            
             .container { padding: 0 1rem; }
+            .about-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -375,7 +356,7 @@
     <header class="header" id="header">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img src="https://i.ibb.co/b3x2xQ7/GRD-Logo-Idea-2.png" alt="G.R.D. Computer Academy Logo">
+                <img src="https://i.ibb.co/tZ5yW8n/photo-2025-07-03-16-31-05.jpg" alt="G.R.D. Computer Academy Logo">
                 <h1>G.R.D. Academy</h1>
             </a>
             <nav>
@@ -383,6 +364,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#portal">Student Portal</a></li>
                     <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle">
@@ -416,15 +398,10 @@
                     <h2>Student Portal</h2>
                     <p>Download your results & apply for new courses.</p>
                     <input type="text" id="rollNumberInput" placeholder="Enter Your Roll Number Here">
-                    <div id="result">
-                        </div>
+                    <div id="result"></div>
                     <div class="portal-buttons">
-                        <button class="btn portal-btn btn-result" onclick="getCertificate()">
-                            <i class="fas fa-download"></i> Download Result
-                        </button>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUtOs7w37DDlYWDHW0oQcdLekXsnll_FktGURvYCF8CjL_gA/viewform" target="_blank" class="btn portal-btn btn-admission">
-                            <i class="fas fa-file-alt"></i> Apply Online
-                        </a>
+                        <button class="btn portal-btn btn-result" onclick="getCertificate()"><i class="fas fa-download"></i> Download Result</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeUtOs7w37DDlYWDHW0oQcdLekXsnll_FktGURvYCF8CjL_gA/viewform" target="_blank" class="btn portal-btn btn-admission"><i class="fas fa-file-alt"></i> Apply Online</a>
                     </div>
                 </div>
             </div>
@@ -433,18 +410,26 @@
         <section class="section" id="courses" style="background-color: var(--light-color);">
             <div class="container">
                 <div class="section-header">
-                    <h2>Courses Offered</h2>
+                    <h2>Our Courses</h2>
                     <p>We provide a range of courses to equip you with the latest technical skills.</p>
                 </div>
-                <div class="courses-grid">
-                    <div class="course-card">
-                        <div class="course-card-content"><h3>Basic Computer Course</h3><p>Foundational knowledge of computer operations, MS Office, and internet usage.</p></div>
+                <img src="https://i.ibb.co/3sZJ2mN/photo-2025-07-03-16-30-55.jpg" alt="G.R.D. Academy Courses" class="promo-banner">
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About G.R.D. Academy</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Excellence in Computer Education</h3>
+                        <p>G.R.D. Computer Academy has been a beacon of quality computer education in Khuian Sarwar, Punjab. We are dedicated to providing comprehensive programs that prepare students for success in the digital world.</p>
+                        <p>Our commitment to excellence, combined with modern teaching methodologies and experienced faculty, ensures that every student receives the best possible technical guidance.</p>
                     </div>
-                    <div class="course-card">
-                        <div class="course-card-content"><h3>Advanced Diploma in Computer Applications</h3><p>In-depth study of programming languages, database management, and software development.</p></div>
-                    </div>
-                    <div class="course-card">
-                        <div class="course-card-content"><h3>Web Designing & Development</h3><p>Learn to build modern, responsive websites with HTML, CSS, JavaScript, and more.</p></div>
+                    <div class="about-image">
+                        <img src="https://i.ibb.co/9hbd5K4/Gemini-Generated-Image-7jiiwy7jiiwy7jii.jpg" alt="Inside G.R.D. Computer Academy">
                     </div>
                 </div>
             </div>
@@ -466,10 +451,7 @@
     </main>
 
     <script>
-        // Configuration
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzE7MIrSk36x4_RwBCCaiMl4hTsgC1jDYOsM20VCRp1LTb50Q46-UValh1-UJREvPVa/exec";
-        
-        // Student Portal Logic
         const rollNumberInput = document.getElementById('rollNumberInput');
         const resultDiv = document.getElementById('result');
         
@@ -500,7 +482,6 @@
             }
         });
 
-        // Mobile Menu & Header Scroll Effect
         const header = document.getElementById('header');
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const navMenu = document.getElementById('nav-menu');
