@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="G.R.D. Computer Academy in Khuian Sarwar, Punjab offers professional courses in Web Development, Data Science, and more. Check results and apply online.">
+    
     <title>G.R.D. Academy - Khuian Sarwar, Punjab</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <style>
         :root {
             --primary-color: #0056b3;
@@ -22,300 +28,87 @@
             --gradient-secondary: linear-gradient(135deg, #28a745, #20c997);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--white);
-            overflow-x: hidden; 
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-color); background-color: var(--white); overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
         /* Header */
-        .header {
-            background: var(--white);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+        .header { background: var(--white); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .header.scrolled { box-shadow: var(--shadow); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1300px; margin: 0 auto; padding: 0 1rem; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+        .logo h1 { font-size: 1.25rem; font-weight: 700; color: var(--primary-color); }
+        .nav-menu { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-menu a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; position: relative; padding: 5px 0; }
+        .nav-menu a:hover { color: var(--primary-color); }
+        .nav-menu a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: width 0.3s ease; }
+        .nav-menu a:hover::after { width: 100%; }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: var(--dark-color); font-size: 1.8rem; cursor: pointer; z-index: 1100; }
 
-        .header.scrolled {
-            box-shadow: var(--shadow);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .logo h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-menu a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        .nav-menu a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--dark-color);
-            font-size: 1.8rem;
-            cursor: pointer;
-            z-index: 1100;
-        }
-        
-        /* Ticker / Running Line */
-        .ticker-wrap {
-            position: fixed;
-            top: 77px; 
-            width: 100%;
-            overflow: hidden;
+        /* Announcement Section (Replaces Ticker) */
+        .announcement-bar {
             background-color: var(--dark-color);
             color: var(--white);
-            padding: 10px 0;
-            z-index: 999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .ticker-move {
-            display: flex;
-            /* --- SPEED INCREASED 5x --- */
-            animation: ticker 7s linear infinite; 
-        }
-
-        .ticker-item {
-            flex-shrink: 0;
-            white-space: nowrap;
-            padding: 0 2rem;
+            padding: 12px 0;
+            text-align: center;
             font-weight: 500;
         }
+        .announcement-bar i { margin-right: 0.5rem; color: var(--accent-color); }
         
-        .ticker-item i {
-            margin-right: 0.5rem;
-            color: var(--accent-color);
-        }
+        main { padding-top: 77px; }
 
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        main {
-            padding-top: 122px;
-        }
-
-        /* Hero Section */
+        /* Hero Section with Animated Gradient */
         .hero {
-            background: var(--gradient-primary);
             color: var(--white);
             padding: 120px 1rem;
             text-align: center;
             position: relative;
+            background: linear-gradient(135deg, #0056b3, #007bff, #28a745);
+            background-size: 200% 200%;
+            animation: gradient-flow 15s ease infinite;
         }
 
-        .hero-content h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .hero-content p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .btn-secondary {
-            background: var(--white);
-            color: var(--primary-color);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
+        .hero-content h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-secondary { background: var(--white); color: var(--primary-color); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
 
         /* Section Base Styles */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
+        .section { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem; }
         
-        /* About Section with Image */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        .about-image img { width: 100%; border-radius: 15px; box-shadow: var(--shadow); }
         
         /* Portal Section */
-        #portal {
-            background-color: var(--light-color);
-        }
+        #portal { background-color: var(--light-color); }
+        .portal-card { background: var(--white); padding: 2.5rem 1.5rem; border-radius: 20px; box-shadow: var(--shadow); text-align: center; max-width: 600px; margin: 0 auto; }
+        .portal-card h2 { font-size: 2.2rem; font-weight: 700; background: var(--gradient-primary); color: transparent; -webkit-background-clip: text; background-clip: text; margin-bottom: 0.5rem; }
+        .portal-card p { font-size: 1.1rem; color: var(--light-text); }
+        #rollNumberInput { width: 100%; padding: 18px 20px; border: 2px solid var(--border-color); border-radius: 12px; font-size: 1.1rem; font-family: 'Poppins', sans-serif; margin-top: 1.5rem; transition: border-color 0.3s; }
+        #rollNumberInput:focus { border-color: var(--primary-color); outline: none; }
+        .portal-buttons { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+        .portal-btn { padding: 18px 30px; font-size: 1.1rem; border-radius: 12px; }
+        .portal-btn i { transition: transform 0.3s ease; }
+        .portal-btn:hover i { transform: translateX(5px); }
 
-        .portal-card {
-            background: var(--white);
-            padding: 2.5rem 1.5rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* --- NEW STYLISH PORTAL TEXT --- */
-        .portal-card h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .portal-card p {
-            font-size: 1.1rem;
-            color: var(--light-text);
-        }
-        /* --- END OF NEW STYLES --- */
-
-        #rollNumberInput {
-            width: 100%;
-            padding: 18px 20px;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-family: 'Poppins', sans-serif;
-            margin-top: 1.5rem;
-        }
-        
-        .portal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .portal-btn {
-            padding: 18px 30px;
-            font-size: 1.1rem;
-            border-radius: 12px;
-        }
-
+        /* Enhanced Button Styles */
         .btn-result { background: var(--gradient-primary); color: var(--white); }
+        .btn-result:hover { box-shadow: 0 10px 20px rgba(0, 86, 179, 0.25); }
         .btn-admission { background: var(--gradient-secondary); color: var(--white); }
-        .btn-download { background: linear-gradient(135deg, #dc3545, #c82333); color: var(--white); }
-        
+        .btn-admission:hover { box-shadow: 0 10px 20px rgba(40, 167, 69, 0.25); }
+
         #result { margin-top: 1.5rem; min-height: 60px; font-weight: 600; display: flex; justify-content: center; align-items: center; }
         .loader { display: inline-block; position: relative; width: 80px; height: 15px; }
         .loader div { position: absolute; top: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--primary-color); animation-timing-function: cubic-bezier(0, 1, 1, 0); }
@@ -327,46 +120,52 @@
         @keyframes loader3 { 0% { transform: scale(1); } 100% { transform: scale(0); } }
         @keyframes loader2 { 0% { transform: translate(0, 0); } 100% { transform: translate(24px, 0); } }
 
-        /* Courses Section */
-        .promo-banner {
-            display: block;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto 3rem auto;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+        /* Shake animation for error */
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0); }
+          20%, 80% { transform: translate3d(2px, 0, 0); }
+          30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
+        /* Courses Section */
+        .promo-banner { display: block; width: 100%; max-width: 900px; margin: 0 auto 3rem auto; border-radius: 15px; box-shadow: var(--shadow); }
+
+        /* NEW Contact Section */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: flex-start; }
+        .contact-info, .contact-form { background: var(--white); padding: 2rem; border-radius: 15px; box-shadow: var(--shadow); }
+        .contact-info h3, .contact-form h3 { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1.5rem; }
+        .contact-info p { margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; }
+        .contact-info i { color: var(--accent-color); font-size: 1.2rem; }
+        .map-container { margin-top: 1.5rem; border-radius: 10px; overflow: hidden; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); font-family: 'Poppins', sans-serif; font-size: 1rem; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
         /* Footer */
-        .footer { background: var(--dark-color); color: var(--white); padding: 3rem 0; text-align: center; }
-        .footer p { margin-bottom: 1rem; }
-        .footer a { color: var(--white); text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-        .footer-bottom { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #495057; font-size: 0.9rem; color: #adb5bd; }
+        .footer { background: var(--dark-color); color: var(--light-color); padding: 4rem 0 2rem 0; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; text-align: left; }
+        .footer-col h4 { font-size: 1.2rem; color: var(--white); margin-bottom: 1rem; }
+        .footer-col p, .footer-col a { color: #adb5bd; text-decoration: none; transition: color 0.3s ease; }
+        .footer-col a:hover { color: var(--white); }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.5rem; }
+        .social-icons { display: flex; gap: 1rem; }
+        .social-icons a { font-size: 1.5rem; color: #adb5bd; transition: transform 0.3s, color 0.3s; }
+        .social-icons a:hover { color: var(--white); transform: scale(1.1); }
+        .footer-bottom { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #495057; text-align: center; font-size: 0.9rem; color: #adb5bd; }
         
         /* Mobile Friendly Fixes */
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(5px);
-                padding-top: 5rem;
-                gap: 1rem;
-                transform: translateX(100%);
-                transition: transform 0.3s ease-in-out;
-            }
+            .nav-menu { display: none; flex-direction: column; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(5px); padding-top: 5rem; gap: 1rem; transform: translateX(100%); transition: transform 0.3s ease-in-out; }
             .nav-menu.active { transform: translateX(0); display: flex; }
             .nav-menu li { width: 100%; text-align: center; }
             .nav-menu a { color: var(--dark-color); display: block; padding: 1rem; font-size: 1.2rem; }
             .mobile-menu-toggle { display: block; }
             .container { padding: 0 1rem; }
-            .about-grid { grid-template-columns: 1fr; }
+            .about-grid, .footer-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -374,7 +173,7 @@
     <header class="header" id="header">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img src="https://i.ibb.co/1G8VgYDG/Whats-App-Image-2025-07-03-at-20-16-35-4bd8408b.jpg" alt="G.R.D. Computer Academy Logo">
+                <img src="images/logo.png" alt="G.R.D. Computer Academy Logo">
                 <h1>G.R.D. Academy</h1>
             </a>
             <nav>
@@ -385,34 +184,27 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
             </nav>
         </div>
     </header>
 
-    <div class="ticker-wrap">
-        <div class="ticker-move">
-            <div class="ticker-item"><i class="fas fa-bullhorn"></i> Admissions for the 2025-26 session are now open! Limited seats available.</div>
-            <div class="ticker-item"><i class="fas fa-star"></i> New courses launched in Web Development & Data Science. Inquire today!</div>
-            <div class="ticker-item"><i class="fas fa-bullhorn"></i> Admissions for the 2025-26 session are now open! Limited seats available.</div>
-            <div class="ticker-item"><i class="fas fa-star"></i> New courses launched in Web Development & Data Science. Inquire today!</div>
-        </div>
-    </div>
-
     <main>
+        <div class="announcement-bar">
+            <i class="fas fa-bullhorn"></i> Admissions for the 2025-26 session are now open!
+        </div>
+
         <section class="hero" id="home">
             <div class="hero-content">
-                <h1>Welcome to G.R.D. Computer Academy</h1>
-                <p>Your journey to technical excellence begins here. Access your results and apply for courses seamlessly.</p>
-                <a href="#portal" class="btn btn-secondary">Get Started</a>
+                <h1 data-aos="fade-down">Welcome to G.R.D. Computer Academy</h1>
+                <p data-aos="fade-down" data-aos-delay="200">Your journey to technical excellence begins here. Access your results and apply for courses seamlessly.</p>
+                <a href="#portal" class="btn btn-secondary" data-aos="fade-up" data-aos-delay="400">Get Started</a>
             </div>
         </section>
 
         <section class="section" id="portal">
             <div class="container">
-                <div class="portal-card">
+                <div class="portal-card" data-aos="fade-up">
                     <h2>Student Portal</h2>
                     <p>Download your results & apply for new courses.</p>
                     <input type="text" id="rollNumberInput" placeholder="Enter Your Roll Number Here">
@@ -427,56 +219,120 @@
 
         <section class="section" id="courses" style="background-color: var(--light-color);">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" data-aos="fade-up">
                     <h2>Our Courses</h2>
                     <p>We provide a range of courses to equip you with the latest technical skills.</p>
                 </div>
-                <img src="https://i.ibb.co/B24Gk5NV/Whats-App-Image-2025-07-03-at-20-18-14-0a000db6.jpg" alt="G.R.D. Academy Courses" class="promo-banner">
+                <img src="images/courses_banner.jpg" alt="G.R.D. Academy Courses" class="promo-banner" data-aos="zoom-in">
             </div>
         </section>
 
         <section class="section" id="about">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header" data-aos="fade-up">
                     <h2>About G.R.D. Academy</h2>
                 </div>
                 <div class="about-grid">
-                    <div class="about-text">
+                    <div class="about-text" data-aos="fade-right">
                         <h3>Excellence in Computer Education</h3>
                         <p>G.R.D. Computer Academy has been a beacon of quality computer education in Khuian Sarwar, Punjab. We are dedicated to providing comprehensive programs that prepare students for success in the digital world.</p>
                         <p>Our commitment to excellence, combined with modern teaching methodologies and experienced faculty, ensures that every student receives the best possible technical guidance.</p>
                     </div>
-                    <div class="about-image">
-                        <img src="https://i.ibb.co/CGWL0Sf/Gemini-Generated-Image-7jiiwy7jiiwy7jii.png" alt="Inside G.R.D. Computer Academy">
+                    <div class="about-image" data-aos="fade-left">
+                        <img src="images/academy_photo.jpg" alt="Inside G.R.D. Computer Academy">
                     </div>
                 </div>
             </div>
         </section>
         
-        <footer class="footer" id="contact">
-             <div class="container">
-                <div class="section-header">
-                    <h2 style="color: var(--white);">Contact Us</h2>
+        <section class="section" id="contact" style="background-color: var(--light-color);">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Contact Us</h2>
+                    <p>Have questions? We'd love to hear from you.</p>
                 </div>
-                <p>Have questions? We'd love to hear from you.</p>
-                <p style="font-size: 1.2rem; font-weight: 500;"><i class="fas fa-phone-alt"></i> <a href="tel:+919888948065">+91 98889 48065</a></p>
-                <p style="font-size: 1.2rem; font-weight: 500;"><i class="fas fa-envelope"></i> <a href="mailto:grdacademykhuiansarwar@gmail.com">grdacademykhuiansarwar@gmail.com</a></p>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 G.R.D. Academy, Khuian Sarwar. All Rights Reserved.</p>
+                <div class="contact-grid">
+                    <div class="contact-info" data-aos="fade-right">
+                        <h3>Get in Touch</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Main Road, Near Bus Stand, Khuian Sarwar, Fazilka, Punjab 152128</p>
+                        <p><i class="fas fa-phone-alt"></i> <a href="tel:+919888948065">+91 98889 48065</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:grdacademykhuiansarwar@gmail.com">grdacademykhuiansarwar@gmail.com</a></p>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3434.992383186214!2d74.195042!3d30.577232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391745460545f1b1%3A0x88f55f269412140a!2sKhuian%20Sarwar!5e0!3m2!1sen!2sin!4v1688500000000!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div class="contact-form" data-aos="fade-left">
+                        <h3>Send a Message</h3>
+                        <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-result" style="width: 100%; border-radius: 8px;">Send Message</button>
+                        </form>
+                    </div>
                 </div>
-             </div>
-        </footer>
+            </div>
+        </section>
     </main>
 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About G.R.D. Academy</h4>
+                    <p>Providing top-tier computer education in Khuian Sarwar to empower the next generation of tech professionals.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portal">Student Portal</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <p>Stay connected with us on social media.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 G.R.D. Academy, Khuian Sarwar. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800, // Animation duration
+            once: true,    // Animate only once
+            offset: 50,    // Trigger animation a bit early
+        });
+
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzE7MIrSk36x4_RwBCCaiMl4hTsgC1jDYOsM20VCRp1LTb50Q46-UValh1-UJREvPVa/exec";
         const rollNumberInput = document.getElementById('rollNumberInput');
         const resultDiv = document.getElementById('result');
         
         async function getCertificate() {
             const rollNumber = rollNumberInput.value.trim();
+            rollNumberInput.classList.remove('shake'); // Reset shake animation
+
             if (!rollNumber) {
                 resultDiv.innerHTML = `<span style="color: #dc3545;">Please enter a valid roll number.</span>`;
+                rollNumberInput.classList.add('shake');
                 return;
             }
             resultDiv.innerHTML = `<div class="loader"><div></div><div></div><div></div><div></div></div>`;
@@ -484,12 +340,14 @@
                 const response = await fetch(`${SCRIPT_URL}?roll=${rollNumber}`);
                 const data = await response.json();
                 if (data.link) {
-                    resultDiv.innerHTML = `<a href="${data.link}" target="_blank" class="btn btn-download"><i class="fas fa-check-circle"></i> Download Certificate</a>`;
+                    resultDiv.innerHTML = `<a href="${data.link}" target="_blank" class="btn btn-result"><i class="fas fa-check-circle"></i> Download Certificate</a>`;
                 } else {
                     resultDiv.innerHTML = `<span style="color: #dc3545;">${data.error || 'No record found.'}</span>`;
+                    rollNumberInput.classList.add('shake');
                 }
             } catch (error) {
                 resultDiv.innerHTML = `<span style="color: #dc3545;">An error occurred. Please try again later.</span>`;
+                rollNumberInput.classList.add('shake');
             }
         }
         
@@ -513,7 +371,6 @@
             }
         });
 
-        // Handles mobile menu open/close and icon change
         mobileMenuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             const isActive = navMenu.classList.contains('active');
