@@ -41,13 +41,17 @@
             overflow-x: hidden; 
         }
 
+        /* 1. SMOOTHING FIX: Added will-change to hint browser about upcoming animations */
+        [data-aos] {
+            will-change: transform, opacity;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        /* Header */
         .header {
             background: var(--white);
             padding: 1rem 0;
@@ -138,7 +142,6 @@
             z-index: 1100;
         }
         
-        /* Ticker / Running Line */
         .ticker-wrap {
             position: fixed;
             top: 77px; 
@@ -152,10 +155,11 @@
         }
 
         .ticker-move {
-            display: inline-flex; /* Changed from flex to inline-flex */
-            /* --- SPEED INCREASED 5x --- */
-             /* 2. JERKY ANIMATION FIX: Animation time doubled to match duplicated content */
-            animation: ticker 20s linear infinite; 
+            display: inline-flex;
+            /* 2. SMOOTHING FIX: Significantly slowed down animation for readability */
+            animation: ticker 45s linear infinite; 
+            /* 3. SMOOTHING FIX: Added will-change for GPU acceleration */
+            will-change: transform;
         }
 
         .ticker-item {
@@ -170,17 +174,15 @@
             color: var(--accent-color);
         }
         
-        /* 3. JERKY ANIMATION FIX: Keyframe adjusted for seamless loop */
         @keyframes ticker {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); } /* Changed from -50% to -100% */
+            100% { transform: translateX(-100%); }
         }
         
         main {
             padding-top: 122px;
         }
 
-        /* Hero Section */
         .hero {
             background: var(--gradient-primary);
             color: var(--white);
@@ -229,7 +231,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Section Base Styles */
         .section {
             padding: 80px 0;
         }
@@ -246,7 +247,6 @@
             margin-bottom: 1rem;
         }
         
-        /* About Section with Image */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -260,7 +260,6 @@
             box-shadow: var(--shadow);
         }
         
-        /* Portal Section */
         #portal {
             background-color: var(--light-color);
         }
@@ -275,7 +274,6 @@
             margin: 0 auto;
         }
         
-        /* --- NEW STYLISH PORTAL TEXT --- */
         .portal-card h2 {
             font-size: 2.2rem;
             font-weight: 700;
@@ -290,7 +288,6 @@
             font-size: 1.1rem;
             color: var(--light-text);
         }
-        /* --- END OF NEW STYLES --- */
 
         #rollNumberInput {
             width: 100%;
@@ -330,7 +327,6 @@
         @keyframes loader3 { 0% { transform: scale(1); } 100% { transform: scale(0); } }
         @keyframes loader2 { 0% { transform: translate(0, 0); } 100% { transform: translate(24px, 0); } }
 
-        /* Courses Section */
         .promo-banner {
             display: block;
             width: 100%;
@@ -340,14 +336,12 @@
             box-shadow: var(--shadow);
         }
 
-        /* Footer */
         .footer { background: var(--dark-color); color: var(--white); padding: 3rem 0; text-align: center; }
         .footer p { margin-bottom: 1rem; }
         .footer a { color: var(--white); text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
         .footer-bottom { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #495057; font-size: 0.9rem; color: #adb5bd; }
         
-        /* Mobile Friendly Fixes */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -376,7 +370,7 @@
 <body>
     <header class="header" id="header">
         <div class="nav-container">
-            <a href="#home" class="logo" data-aos="fade-down">
+            <a href="#home" class="logo" data-aos="fade-in">
                 <img src="https://i.ibb.co/1G8VgYDG/Whats-App-Image-2025-07-03-at-20-16-35-4bd8408b.jpg" alt="G.R.D. Computer Academy Logo">
                 <h1>G.R.D. Academy</h1>
             </a>
@@ -411,7 +405,7 @@
     <main>
         <section class="hero" id="home">
             <div class="hero-content">
-                 <h1 data-aos="fade-up">Welcome to G.R.D. Computer Academy</h1>
+                <h1 data-aos="fade-up">Welcome to G.R.D. Computer Academy</h1>
                 <p data-aos="fade-up" data-aos-delay="100">Your journey to technical excellence begins here. Access your results and apply for courses seamlessly.</p>
                 <a href="#portal" class="btn btn-secondary" data-aos="fade-up" data-aos-delay="200">Get Started</a>
             </div>
@@ -419,7 +413,7 @@
 
         <section class="section" id="portal">
             <div class="container">
-                 <div class="portal-card" data-aos="fade-up">
+                <div class="portal-card" data-aos="fade-up">
                     <h2>Student Portal</h2>
                     <p>Download your results & apply for new courses.</p>
                     <input type="text" id="rollNumberInput" placeholder="Enter Your Roll Number Here">
@@ -438,7 +432,7 @@
                     <h2>Our Courses</h2>
                     <p>We provide a range of courses to equip you with the latest technical skills.</p>
                 </div>
-                <img src="https://i.ibb.co/B24Gk5NV/Whats-App-Image-2025-07-03-at-20-18-14-0a000db6.jpg" alt="G.R.D. Academy Courses" class="promo-banner" data-aos="zoom-in-up">
+                <img src="https://i.ibb.co/B24Gk5NV/Whats-App-Image-2025-07-03-at-20-18-14-0a000db6.jpg" alt="G.R.D. Academy Courses" class="promo-banner" data-aos="fade-up">
             </div>
         </section>
 
@@ -520,7 +514,6 @@
             }
         });
 
-        // Handles mobile menu open/close and icon change
         mobileMenuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             const isActive = navMenu.classList.contains('active');
@@ -530,9 +523,11 @@
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+      // 6. SMOOTHING FIX: Added a gentler easing function and adjusted duration
       AOS.init({
-        duration: 1000, // Animation lasts 1 second
-        once: true // Animation happens only once
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
       });
     </script>
 </body>
